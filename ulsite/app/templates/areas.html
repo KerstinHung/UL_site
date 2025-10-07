@@ -1,0 +1,93 @@
+{% load static %}
+{% load quest_filters %}
+<!doctype html> <!-- 告訴瀏覽器這是html檔-->
+<html lang="zh-Hant">
+  <head> <!--放網頁資訊-->
+    <meta charset="utf-8" /> <!--網頁中文編碼，這段等同於<meta charset="utf-8"></meta>，因為meta標籤中間通常不會有內容-->
+    <title>ULsite</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="keywords" content="UL, unlight, 任務, 攻略" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={% now 'U' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'media/salgado_icon.gif' %}"/>
+  </head>
+  <body><!--放會看到的內容-->
+    <img src="{% static 'media/world_map.jpg' %}?v={% now 'U' %}" />
+    <div class="region_container">
+      {% for ar in areas %}
+      <div>
+        <h2>
+          {{ ar.name }}
+        </h2>
+        <ul>
+          {% for rg in ar.regions.all %}
+          <li data-region="{{ rg.name }}">{{ rg.name }}</li>
+          {% empty %}
+              <tr>
+                <td colspan="2">尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。</td>  <!--p放plaintext，會佔一整行的空間-->
+              </tr>
+          {% endfor %}
+        </ul>
+      </div>
+      {% empty %}
+          尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。  <!--p放plaintext-->
+      {% endfor %}
+    </div>
+    <br />
+
+    <h2>任務清單</h2>
+    <p class="comment"> M1, M2, M3 也包含對應的硬幣和碎片</p>
+    <p class="comment"> 金幣, 白金幣也包含對應的碎片</p>
+    <label><input type="checkbox" id="filter-m1"> M1</label>
+    <label><input type="checkbox" id="filter-m2"> M2</label>
+    <label><input type="checkbox" id="filter-m3"> M3</label>
+    <label><input type="checkbox" id="filter-gold"> 金幣</label>
+    <label><input type="checkbox" id="filter-platinum"> 白金幣</label>
+    <label><input type="checkbox" id="filter-boss"> BOSS</label>
+    <label><input type="checkbox" id="filter-treasure"> 寶圖</label>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>名稱</th>
+          <th>0分</th>
+          <th>3分</th>
+          <th>10分</th>
+          <th>30分</th>
+          <th>1小時</th>
+          <th>2小時</th>
+          <th>4小時</th>
+          <th>8小時</th>
+          <th>16小時</th>
+          <th>1天</th>
+          <th>3天</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for qu in quests %}
+          <tr data-region="{{ qu.region.name }}" data-m1="{{ qu.m1 }}" data-m2="{{ qu.m2 }}" data-m3="{{ qu.m3 }}" 
+              data-iron="{{ qu.iron }}" data-bronze="{{ qu.bronze }}" data-silver="{{ qu.silver }}" data-gold="{{ qu.gold }}" data-platinum="{{qu.platinum}}"
+              data-memory="{{ qu.memory }}" data-time="{{ qu.time }}" data-soul="{{ qu.soul }}" data-light="{{ qu.light }}" data-unlight="{{ qu.unlight }}"
+              data-boss="{{ qu.boss }}" data-treasure="{{ qu.treasure }}">
+            <td>{{ qu.name }}</td>
+            <td>{{ qu.min0|yesno_o }}</td>
+            <td>{{ qu.min3|yesno_o }}</td>
+            <td>{{ qu.min10|yesno_o }}</td>
+            <td>{{ qu.min30|yesno_o }}</td>
+            <td>{{ qu.hr1|yesno_o }}</td>
+            <td>{{ qu.hr2|yesno_o }}</td>
+            <td>{{ qu.hr4|yesno_o }}</td>
+            <td>{{ qu.hr8|yesno_o }}</td>
+            <td>{{ qu.hr16|yesno_o }}</td>
+            <td>{{ qu.day1|yesno_o }}</td>
+            <td>{{ qu.day3|yesno_o }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="2">尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。</td>  <!--p放plaintext-->
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  <script src="{% static 'js/quest.js' %}?v={% now 'U' %}"></script>
+  </body>
+</html>
