@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const rows = Array.from(document.querySelectorAll("tbody tr"));
+  const rows = Array.from(document.querySelectorAll("table.searchtime tbody tr"));
 
   // checkbox elements (確保 template 有 id)
   const cb = {

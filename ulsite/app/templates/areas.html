@@ -4,12 +4,12 @@
 {% load quest_filters %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={% now 'U' %}" />
+    <link rel="stylesheet" href="{% static 'css/quest.css' %}?v={% now 'U' %}" />
 {% endblock %}
 
 {% block content %}
-    <img src="{% static 'media/world_map.jpg' %}?v={% now 'U' %}" />
     <div class="wrap">
+      <img class="topic" src="{% static 'media/world_map.jpg' %}?v={% now 'U' %}" />
       <div class="region_container">
       {% for ar in areas %}
       <div>
@@ -29,21 +29,39 @@
       {% empty %}
           尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。  <!--p放plaintext-->
       {% endfor %}
-    </div>
+      </div>
     <br />
 
     <h2>任務清單</h2>
-    <p class="comment"> M1, M2, M3 也包含對應的硬幣和碎片</p>
-    <p class="comment"> 金幣, 白金幣也包含對應的碎片</p>
-    <label><input type="checkbox" id="filter-m1"> M1</label>
-    <label><input type="checkbox" id="filter-m2"> M2</label>
-    <label><input type="checkbox" id="filter-m3"> M3</label>
-    <label><input type="checkbox" id="filter-gold"> 金幣</label>
-    <label><input type="checkbox" id="filter-platinum"> 白金幣</label>
-    <label><input type="checkbox" id="filter-boss"> BOSS</label>
-    <label><input type="checkbox" id="filter-treasure"> 寶圖</label>
+    <table class="comment">
+      <tr>
+        <td class="emoji">
+          <figure><img src="{% static 'media/bluecase.gif' %}?v={% now 'U' %}" /></figure>
+        </td>
+        <td>
+          <p> M1, M2, M3 也包含對應的硬幣和碎片</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="emoji">
+          <figure><img src="{% static 'media/bluecase.gif' %}?v={% now 'U' %}" /></figure>
+        </td>
+        <td>
+          <p> 金幣, 白金幣也包含對應的碎片</p>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <label><input type="checkbox" id="filter-m1"> M1</label>
+      <label><input type="checkbox" id="filter-m2"> M2</label>
+      <label><input type="checkbox" id="filter-m3"> M3</label>
+      <label><input type="checkbox" id="filter-gold"> 金幣</label>
+      <label><input type="checkbox" id="filter-platinum"> 白金幣</label>
+      <label><input type="checkbox" id="filter-boss"> BOSS</label>
+      <label><input type="checkbox" id="filter-treasure"> 寶圖</label>
+    </div>
     <br />
-    <table>
+    <table class="searchtime">
       <thead>
         <tr>
           <th>名稱</th>

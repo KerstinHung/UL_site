@@ -29,13 +29,38 @@ ul li.checked {
     width: 150px;
 }
 
-img {
+img.topic {
     width: 50%;
     margin: auto;
     display: block;
 }
 
+/* Comment */
 .comment {
     color: #777;
     font: 12px / 22px Arial, sans-serif;
+    border: none;
+}
+
+.comment tr td {
+    border: none;              /* 各儲存格不顯示邊線 */
+    margin-top: 0px;
+    margin-bottom: 1px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+td.emoji {
+    width: 1%;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    text-align: left;
+}
+
+td.emoji figure {
+  margin: 0;          /* remove default */
+  padding: 0%;
+  text-align: left;
 }
