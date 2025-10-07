@@ -10,7 +10,7 @@ from django.core.validators import MinValueValidator
 from django.forms import ValidationError
 
 class SkillPhase(models.TextChoices):
-            # value(不動), label(可動)
+            # value(constant), label(variable)
     ATTACK = "ATK", "Attack"
     DEFENSE = "DEF", "Defense"
     OTHER   = "MOV",   "Move"
@@ -119,13 +119,13 @@ class Skill(models.Model):
         return self.name
 
 """class SkillRequirement(models.Model):
-    # 一筆紀錄 = 一條需求；同一技能多筆需求 => 彼此 AND。
+    # One record = one request; Multiple requests for the same skill => "AND" each other。
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE, related_name="requirements")
     card_type = models.CharField(max_length=16, choices=CardType.choices)
     comparator = models.CharField(max_length=4, choices=CompareOp.choices, default=CompareOp.GE)
     count = models.PositiveSmallIntegerField()
 
-    # 如果「槍1 / 槍2 / 槍3」是『不同子類』，可加這個欄位：
+    # If「槍1 / 槍2 / 槍3」are different subclass, can create this column
     subtype = models.CharField(max_length=16, blank=True, null=True)  # 例："1"、"2"、"3"
 
     class Meta:
@@ -168,7 +168,6 @@ class Character(models.Model):
 
 class CharacterCard(models.Model):
     class CardType(models.TextChoices):
-            # value(不動), label(可動)
         NORMAL = "LV", "Normal"
         RARE = "R", "Rare"
         OTHER   = "EP",   "Move"
@@ -283,15 +282,13 @@ class QuestStage(models.Model):
             ('characard', self.characard),
         ]
 
-        # 計算哪些欄位有值
+        # Calculate: which columns have value
         set_fields = [name for name, value in reward_fields if value not in (None, '', 0)]
 
         if len(set_fields) > 1:
             raise ValidationError(
                 f"只能設定一種獎勵類型，目前同時設定了: {', '.join(set_fields)}"
             )
-
-        # ✅ 全都沒 set 是允許的，所以不需要再額外處理
 
     def __str__(self):
         return f"QuestStage(quest={self.quest}, stage={self.stage}, pos={self.position})"

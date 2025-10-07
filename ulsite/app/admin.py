@@ -4,7 +4,7 @@ from .models import Area, Region, Quest, QuestStage, Monster, BirthPlace, Skill,
 
 class _NumberFilter(admin.SimpleListFilter):
     title = ""
-    parameter_name = "" # URL query string 參數名稱 (?m1=pos)
+    parameter_name = "" # URL query string parameter name (?m1=pos)
     field_name = ""
 
     def lookups(self, request, model_admin):
@@ -21,7 +21,7 @@ class _NumberFilter(admin.SimpleListFilter):
         return queryset
 
 def make_sign_filter(field_name: str, *, title: Optional[str] = None, param: Optional[str] = None):
-    """工廠：傳欄位名就動態建立一個 Filter 類別"""
+    # Factory: Pass column name and create a filter type dynamically
     cls_name = f"{field_name.title().replace('_','')}SignFilter"
     attrs = {
         "title": title or field_name,
@@ -68,17 +68,17 @@ class QuestAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     
     list_filter = ["region", "boss", "treasure"]
-    list_display_links = ("name",)  # ← 讓「任務名」變成可點的連結
+    list_display_links = ("name",)  # ← Clickable `quest name``
 
     SIGN_FILTER_FIELDS = ["m1", "m2", "m3",
                           "iron", "bronze", "silver", "gold", "platinum",
                           "memory", "time", "soul", "light", "unlight"]
     def get_list_filter(self, request):
-        # 先取得父類（也就是上面 list_filter）的設定
+        # First: Get father's（The `list_filter` in this class）settings
         base = list(super().get_list_filter(request))
-        # 依 SIGN_FILTER_FIELDS 動態長出對應的 filter 類別
+        # Create according filter types based on SIGN_FILTER_FIELDS dynamically
         dynamic_filters = [make_sign_filter(f, title=f) for f in self.SIGN_FILTER_FIELDS]
-        # 合併並回傳
+        # Merge and return
         return tuple(base + dynamic_filters)
     def get_ordering(self, request):
         return ['id']  # sort case insensitive

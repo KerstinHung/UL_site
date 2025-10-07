@@ -13,18 +13,14 @@ def _to_int(x):
         return None
 
 def import_quest_stage(csv_path: str):
-    # 開啟 CSV 檔案
     with open(csv_path, 'r', newline='', encoding='utf-8-sig') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
 
-        # 第一列是標頭，跳過
         peek = next(reader, None)
         if peek is None:
             print("CSV 是空的")
             return
-        # 判斷第一欄是不是數字 id，不是就當標頭；是就當第一筆資料
         rows = []
-        # 把剩下的列加進來
         rows.extend(reader)
 
         created_cnt = 0
@@ -32,12 +28,11 @@ def import_quest_stage(csv_path: str):
         updated_cnt = 0
 
         for row in rows:
-            # 外鍵
             quest_name = row[0]
             quest_obj = Quest.objects.filter(name=quest_name).first() if quest_name else None
             goal = quest_obj.goal
 
-            cntr = 0 # 用 mod 決定 l/m/r，用 // 決定stage1/2/3...
+            cntr = 0 # Use mod to determine l/m/r. Use // to determine stage1/2/3...
             for rew in row[len(row)-18:]:
                 mod = cntr % 3
                 if mod == 0: position = 'L'
@@ -46,7 +41,6 @@ def import_quest_stage(csv_path: str):
                 stage = (cntr // 3) + 1
                 if stage > goal: break
 
-                # 外鍵
                 monster_obj = Monster.objects.filter(name=rew).first() if rew else None
                 if ('Lv' in rew):
                     level = _to_int(rew[2])
@@ -80,7 +74,6 @@ def import_quest_stage(csv_path: str):
                 if created:
                     created_cnt += 1
                 else:
-                    # 已存在就更新（如果你不想更新，用 continue 即可）
                     QuestStage.objects.filter(pk=obj.pk).update(**defaults)
                     updated_cnt += 1
                 cntr += 1
@@ -176,18 +169,14 @@ def import_quest(csv_path: str, region: str):
         print(f"Total quests now: {Quest.objects.count()}")
 
 def only_update_goal(csv_path: str, region: str):
-    # 開啟 CSV 檔案
     with open(csv_path, 'r', newline='', encoding='utf-8-sig') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
 
-        # 第一列是標頭，跳過
         peek = next(reader, None)
         if peek is None:
             print("CSV 是空的")
             return
-        # 判斷第一欄是不是數字 id，不是就當標頭；是就當第一筆資料
         rows = []
-        # 把剩下的列加進來
         rows.extend(reader)
 
         skipped_cnt = 0
@@ -208,7 +197,7 @@ def only_update_goal(csv_path: str, region: str):
 
 def run():
     
-    # 刪除所有 queststage
+    # Delete all queststage
     queststages = QuestStage.objects.all()
     queststages.delete()
     

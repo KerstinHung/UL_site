@@ -1,8 +1,8 @@
 {% load static %}
-<!doctype html> <!-- 告訴瀏覽器這是html檔-->
+<!doctype html> <!-- Told Browser This is Html File-->
 <html lang="zh-Hant">
-  <head> <!--放網頁資訊-->
-    <meta charset="utf-8" /> <!--網頁中文編碼，這段等同於<meta charset="utf-8"></meta>，因為meta標籤中間通常不會有內容-->
+  <head> <!-- Page Info -->
+    <meta charset="utf-8" /> <!-- Chinese Encoding -->
     <title>ULsite</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="keywords" content="UL, unlight, 任務, 攻略" />
@@ -11,19 +11,19 @@
     {% block head %}
     {% endblock %}
   </head>
-  <body><!--放會看到的內容-->
+  <body>
     
-    <!-- 共用導覽列 -->
+    <!-- Common Top Navigator -->
     <div class="topnav">
       <a href="{% url 'homepage' %}">Home</a>
       <a href="{% url 'quest_homepage_list' %}">Map</a>
       <!--<a href="#contact">Characters</a>-->
     </div>
 
-    <!-- 主要內容區 -->
+    <!-- Main Content -->
     <div class="content">
       {% block content %}
-      <!-- 子頁面會覆寫這裡 -->
+      <!-- Child Page Overwrite Here -->
       {% endblock %}
     </div>
 

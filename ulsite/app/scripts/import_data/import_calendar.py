@@ -8,20 +8,20 @@ def _to_int(x):
         return None
 
 def import_non_img_data(csv_path: str):
-    # 開啟 CSV 檔案
+    # Open csv
     with open(csv_path, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
 
-        # 如果第一列是標頭，就跳過
+        # If the first row is header, skip it
         peek = next(reader, None)
         if peek is None:
             print("CSV 是空的")
             return
-        # 判斷第一欄的id是不是數字，不是就當標頭；是就當第一筆資料
+        # If the first column is not an int, skip it(It is the header)
         rows = []
         if peek and (peek[0].strip().isdigit()):
-            rows.append(peek)  # 第一列就是資料
-        # 把剩下的列加進來
+            rows.append(peek)  # First row is data
+        # Add remaining data
         rows.extend(reader)
 
         created_cnt = 0
@@ -34,17 +34,17 @@ def import_non_img_data(csv_path: str):
             id,solar_m,solar_d,fr_m,fr_d,fr_name,en_name,cn_name = row
             print(row[:5])
 
-            # 轉型
+            # Casting
             id_i = _to_int(id)
             solar_m_i = _to_int(solar_m)
             solar_d_i = _to_int(solar_d)
             fr_d_i   = _to_int(fr_d)
 
-            # 外鍵（可為 None）
+            # Foreign Key
             month_obj = FrenchMonth.objects.filter(fr_name=fr_m).first() if fr_m else None
 
-            # 以 fr_name 去判定是否已存在
-            # 若你希望以 id 為唯一鍵，可改成 pk=_to_int(xxx)
+            # Use `fr_name` for determine exist or not
+            # If you want to use `id` as the unique key, use `pk=_to_int(xxx)`
             defaults = dict(
                 id = id_i,
                 solar_m = solar_m_i,
@@ -60,10 +60,10 @@ def import_non_img_data(csv_path: str):
             if created:
                 created_cnt += 1
             else:
-                # 已存在就更新（如果你不想更新，用 continue 即可）
+                # If Exist, Update it
                 Calendar.objects.filter(pk=obj.pk).update(**defaults)
                 updated_cnt += 1
-                # 如果你想跳過而不更新，改成：
+                # Do Not Want to Update, You Can:
                 # skipped_cnt += 1
                 # continue
 

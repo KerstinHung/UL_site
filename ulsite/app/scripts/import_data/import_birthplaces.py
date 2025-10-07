@@ -21,7 +21,7 @@ def run():
         if created:
             created_cnt += 1
         else:
-            # 已存在就更新（如果你不想更新，用 continue 即可）
+            # If Exist, Update it
             BirthPlace.objects.filter(pk=obj.pk).update(**defaults)
             updated_cnt += 1
 

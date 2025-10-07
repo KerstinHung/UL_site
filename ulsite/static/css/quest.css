@@ -43,7 +43,7 @@ img.topic {
 }
 
 .comment tr td {
-    border: none;              /* 各儲存格不顯示邊線 */
+    border: none;              /* Hide gridlines */
     margin-top: 0px;
     margin-bottom: 1px;
     padding-top: 0px;

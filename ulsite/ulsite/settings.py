@@ -26,9 +26,9 @@ DB_PORT = config("DB_PORT")
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # STATIC_ROOT 留給 collectstatic 使用（部署時）
-MEDIA_URL = '/media/'                     # 網址對應前綴
-MEDIA_ROOT = STATIC_ROOT / 'media'           # 本地實際目錄
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Save `STATIC_ROOT` for collectstatic(deploy)
+MEDIA_URL = '/media/'                     # prefix for website
+MEDIA_ROOT = STATIC_ROOT / 'media'           # actual local location
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

@@ -21,13 +21,13 @@
           <li data-region="{{ rg.name }}">{{ rg.name }}</li>
           {% empty %}
               <tr>
-                <td colspan="2">尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。</td>  <!--p放plaintext，會佔一整行的空間-->
+                <td colspan="2">尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。</td>  <!--p=plaintext, default display=block-->
               </tr>
           {% endfor %}
         </ul>
       </div>
       {% empty %}
-          尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。  <!--p放plaintext-->
+          尚無資料，請先到<p><a href="/admin/"></a>後台</a></p>新增。
       {% endfor %}
       </div>
     <br />

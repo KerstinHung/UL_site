@@ -2,7 +2,6 @@ from app.models import Area, Region
 import csv
 
 def initAdd():
-    # 開啟 CSV 檔案
     with open('/Users/hungciyi/UL_site/crawl/csv_data/regions.csv', 'r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for r, a in reader:
@@ -26,7 +25,7 @@ def run():
 
     print(Region.objects.all())
     """
-    # 刪除所有 region
+    # Delete all region
     regions = Region.objects.all()
     regions.delete()
     print(Region.objects.all())
