@@ -1,0 +1,29 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans TC", Arial, sans-serif; margin: 0px; }
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: lightgray;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  color: black;
+}
+
+/* Content */
+.wrap {
+    max-width: 80%;
+    margin: auto;
+}

@@ -9,3 +9,6 @@ def quest_homepage_list(request):
     return render(request, "areas.html", {"areas": areas,
                                           "regions": regions,
                                           "quests": quests})
+
+def homepage(request):
+    return render(request, "homepage.html")

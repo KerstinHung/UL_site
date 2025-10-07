@@ -1,18 +1,16 @@
+{% extends "base.html" %}
+
 {% load static %}
 {% load quest_filters %}
-<!doctype html> <!-- 告訴瀏覽器這是html檔-->
-<html lang="zh-Hant">
-  <head> <!--放網頁資訊-->
-    <meta charset="utf-8" /> <!--網頁中文編碼，這段等同於<meta charset="utf-8"></meta>，因為meta標籤中間通常不會有內容-->
-    <title>ULsite</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="keywords" content="UL, unlight, 任務, 攻略" />
+
+{% block head %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v={% now 'U' %}" />
-    <link rel="shortcut icon" type="image/png" href="{% static 'media/salgado_icon.gif' %}"/>
-  </head>
-  <body><!--放會看到的內容-->
+{% endblock %}
+
+{% block content %}
     <img src="{% static 'media/world_map.jpg' %}?v={% now 'U' %}" />
-    <div class="region_container">
+    <div class="wrap">
+      <div class="region_container">
       {% for ar in areas %}
       <div>
         <h2>
@@ -88,6 +86,6 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
   <script src="{% static 'js/quest.js' %}?v={% now 'U' %}"></script>
-  </body>
-</html>
+{% endblock %}

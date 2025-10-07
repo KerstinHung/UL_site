@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/img.css' %}?v={% now 'U' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="wrap">
+    <img src="{% static 'media/homeimg.png' %}?v={% now 'U' %}" />
+  </div>
+{% endblock %}
