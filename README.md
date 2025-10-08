@@ -7,4 +7,4 @@ Providing strategy guide and archiving storyline for the video game: [Unlight](h
 ## Quest Resource Finder
 On the Map page, UL site provides a table with resource and region filters to help players locate quests for specific resources and view their search durations.
 
-![image](https://github.com/KerstinHung/UL_site/Document/image/questtable.png)
+![image](./Document/image/questtable.png)
