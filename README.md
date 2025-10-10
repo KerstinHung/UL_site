@@ -1,5 +1,5 @@
 # UL site
-Providing strategy guide and archiving storyline for the video game: [Unlight](https://store.steampowered.com/app/3247080?snr=5000_5100__)
+Providing strategy guide and archiving storyline for the video game: [Unlight](https://store.steampowered.com/app/3247080/UNLIGHTRevive/)
 
 ---
 
