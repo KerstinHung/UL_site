@@ -52,6 +52,7 @@ def import_non_img_data(csv_path: str):
                 DEF      = def_i,
                 family   = family_obj,
             )
+            defaults = {k: v for k, v in defaults.items() if v is not None}
             obj, created = Monster.objects.get_or_create(name=name, defaults=defaults)
 
             if created:
@@ -76,15 +77,7 @@ def import_img(img_dir: str):
             monster.image.save(filename, File(f), save=True)
 
 def run():
-    base_dir = "/Users/hungciyi/UL_site"
-    csv_path = f'{base_dir}/crawl/csv_data/monsters.csv'
-    img_dir = f'{base_dir}/images/monsters'
-    #import_non_img_data(csv_path)
-    import_img(img_dir)
-
-    """
-    # 刪除所有 monster
-    monsters = Monster.objects.all()
-    monsters.delete()
-    print(Monster.objects.all())
-    """
+    csv_path = '../crawl/csv_data/monsters.csv'
+    #img_dir = '../images/monsters'
+    import_non_img_data(csv_path)
+    #import_img(img_dir)

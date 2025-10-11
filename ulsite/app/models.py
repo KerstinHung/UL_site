@@ -36,8 +36,8 @@ class CardType(models.TextChoices):
 
 class FrenchMonth(models.Model):
     id = models.IntegerField(primary_key=True)
-    fr_name = models.CharField(max_length=11, blank=True, null=True)
-    cn_name = models.CharField(max_length=1, blank=True, null=True)
+    fr_name = models.CharField(max_length=11, blank=True, default="")
+    cn_name = models.CharField(max_length=1, blank=True, default="")
     image = models.ImageField(upload_to='french_month/', blank=True, null=True)
 
     class Meta:
@@ -49,13 +49,13 @@ class FrenchMonth(models.Model):
 
 class Calendar(models.Model):
     id = models.IntegerField(primary_key=True)
-    solar_m = models.PositiveSmallIntegerField(blank=True, null=True)
-    solar_d = models.PositiveSmallIntegerField(blank=True, null=True)
-    fr_m = models.ForeignKey(FrenchMonth, on_delete=models.SET_NULL, blank=True, null=True)
-    fr_d = models.PositiveSmallIntegerField(blank=True, null=True)
-    fr_name = models.CharField(max_length=15, blank=True, null=True)
-    en_name = models.CharField(max_length=19, blank=True, null=True)
-    cn_name = models.CharField(max_length=6, blank=True, null=True)
+    solar_m = models.PositiveSmallIntegerField(blank=True, default=0)
+    solar_d = models.PositiveSmallIntegerField(blank=True, default=0)
+    fr_m = models.ForeignKey(FrenchMonth, on_delete=models.SET_NULL, null=True)
+    fr_d = models.PositiveSmallIntegerField(blank=True, default=0)
+    fr_name = models.CharField(max_length=15, blank=True, default="")
+    en_name = models.CharField(max_length=19, blank=True, default="")
+    cn_name = models.CharField(max_length=6, blank=True, default="")
 
     class Meta:
         managed = True
@@ -66,13 +66,13 @@ class Calendar(models.Model):
 
 class Monster(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=10, blank=True, null=True)
-    eng_name = models.CharField(max_length=25, blank=True, null=True)
-    level = models.PositiveSmallIntegerField(db_column='level', blank=True, null=True)
-    cost = models.PositiveSmallIntegerField(blank=True, null=True)
-    HP = models.PositiveSmallIntegerField(blank=True, null=True)
-    ATK = models.PositiveSmallIntegerField(blank=True, null=True)
-    DEF = models.PositiveSmallIntegerField(blank=True, null=True)
+    name = models.CharField(max_length=10, blank=True, default="")
+    eng_name = models.CharField(max_length=25, blank=True, default="")
+    level = models.PositiveSmallIntegerField(db_column='level', blank=True, default=0)
+    cost = models.PositiveSmallIntegerField(blank=True, default=0)
+    HP = models.PositiveSmallIntegerField(blank=True, default=0)
+    ATK = models.PositiveSmallIntegerField(blank=True, default=0)
+    DEF = models.PositiveSmallIntegerField(blank=True, default=0)
     image = models.ImageField(upload_to='monsters/', blank=True, null=True)
     family = models.ForeignKey("self", db_column='base_monster_id', on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -85,8 +85,8 @@ class Monster(models.Model):
 
 class BirthPlace(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=10, blank=True, null=True)
-    eng_name = models.CharField(max_length=20, blank=True, null=True)
+    name = models.CharField(max_length=10, blank=True, default="")
+    eng_name = models.CharField(max_length=20, blank=True, default="")
 
     class Meta:
         managed = True
@@ -98,9 +98,9 @@ class BirthPlace(models.Model):
 class Skill(models.Model):
     id = models.AutoField(primary_key=True)
     ex = models.BooleanField(blank=True, default=False)
-    name = models.CharField(max_length=15, blank=True, null=True)
-    eng_name = models.CharField(max_length=30, blank=True, null=True)
-    phase = models.CharField(max_length=15, choices=SkillPhase.choices)
+    name = models.CharField(max_length=15, blank=True, default="")
+    eng_name = models.CharField(max_length=30, blank=True, default="")
+    phase = models.CharField(max_length=15, choices=SkillPhase.choices, default="")
     near = models.BooleanField(blank=True, default=False)
     mid = models.BooleanField(blank=True, default=False)
     far = models.BooleanField(blank=True, default=False)
@@ -134,18 +134,18 @@ class Skill(models.Model):
 
 class Character(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=10, blank=True, null=True)
-    eng_name = models.CharField(max_length=15, blank=True, null=True)
-    jp_name = models.CharField(max_length=10, blank=True, null=True)
+    name = models.CharField(max_length=10, blank=True, default="")
+    eng_name = models.CharField(max_length=15, blank=True, default="")
+    jp_name = models.CharField(max_length=10, blank=True, default=0)
     birth_day = models.ForeignKey(Calendar, on_delete=models.SET_NULL, blank=True, null=True)
-    blood_type = models.CharField(max_length=3, blank=True, null=True)
-    height = models.PositiveSmallIntegerField(blank=True, null=True)
-    weight = models.PositiveSmallIntegerField(blank=True, null=True)
-    hobby = models.CharField(max_length=10, blank=True, null=True)
-    title = models.CharField(max_length=20, blank=True, null=True)
-    cv = models.CharField(max_length=6, blank=True, null=True)
-    description_cn = models.CharField(max_length=100, blank=True, null=True)
-    description_jp = models.CharField(max_length=50, blank=True, null=True)
+    blood_type = models.CharField(max_length=3, blank=True, default="")
+    height = models.PositiveSmallIntegerField(blank=True, default=0)
+    weight = models.PositiveSmallIntegerField(blank=True, default=0)
+    hobby = models.CharField(max_length=10, blank=True, default="")
+    title = models.CharField(max_length=20, blank=True, default="")
+    cv = models.CharField(max_length=6, blank=True, default="")
+    description_cn = models.CharField(max_length=100, blank=True, default="")
+    description_jp = models.CharField(max_length=50, blank=True, default="")
     
     skill1 = models.ForeignKey(Skill, on_delete=models.SET_NULL, blank=True, null=True, related_name="skill1_character")
     skill2 = models.ForeignKey(Skill, on_delete=models.SET_NULL, blank=True, null=True, related_name="skill2_character")
@@ -173,12 +173,12 @@ class CharacterCard(models.Model):
         OTHER   = "EP",   "Move"
 
     id = models.IntegerField(primary_key=True)
-    card_type = models.CharField(max_length=3, blank=True, null=True)
-    level = models.PositiveSmallIntegerField(blank=True, null=True)
-    cost = models.PositiveSmallIntegerField(blank=True, null=True)
-    HP = models.PositiveSmallIntegerField(blank=True, null=True)
-    ATK = models.PositiveSmallIntegerField(blank=True, null=True)
-    DEF = models.PositiveSmallIntegerField(blank=True, null=True)
+    card_type = models.CharField(max_length=3, blank=True, default="")
+    level = models.PositiveSmallIntegerField(blank=True, default=0)
+    cost = models.PositiveSmallIntegerField(blank=True, default=0)
+    HP = models.PositiveSmallIntegerField(blank=True, default=0)
+    ATK = models.PositiveSmallIntegerField(blank=True, default=0)
+    DEF = models.PositiveSmallIntegerField(blank=True, default=0)
     event_gun = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
     event_sword = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
     event_defense = models.PositiveSmallIntegerField(blank=True, null=True, default=0)
@@ -203,7 +203,7 @@ class CharacterCard(models.Model):
 
 class Area(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(db_column = 'area_name', max_length=10, blank=True, null=True)
+    name = models.CharField(db_column = 'area_name', max_length=10, blank=True, default="")
 
     class Meta:
         managed = True
@@ -214,7 +214,7 @@ class Area(models.Model):
 
 class Region(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(db_column = 'region_name', max_length=10, blank=True, null=True)
+    name = models.CharField(db_column = 'region_name', max_length=10, blank=True, default="")
     area = models.ForeignKey(Area, models.SET_NULL, related_name="regions", blank=True, null=True)
 
     class Meta:
@@ -226,7 +226,7 @@ class Region(models.Model):
 
 class Quest(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(db_column='quest_name', max_length=20, blank=True, null=True)
+    name = models.CharField(db_column='quest_name', max_length=20, blank=True, default="")
     boss = models.BooleanField(blank=True, default=False)
     treasure = models.BooleanField(blank=True, default=False)
     goal = models.PositiveSmallIntegerField(blank=True, default=1)
@@ -241,19 +241,19 @@ class Quest(models.Model):
     hr16 = models.BooleanField(db_column='16小時', blank=True, default=True)
     day1 = models.BooleanField(db_column='1天', blank=True, default=True)
     day3 = models.BooleanField(db_column='3天', blank=True, default=True)
-    m1 = models.PositiveSmallIntegerField(db_column='M1', blank=True, null=True)  # Field name made lowercase.
-    m2 = models.PositiveSmallIntegerField(db_column='M2', blank=True, null=True)  # Field name made lowercase.
-    m3 = models.PositiveSmallIntegerField(db_column='M3', blank=True, null=True)  # Field name made lowercase.
-    iron = models.PositiveSmallIntegerField(db_column='鐵幣', blank=True, null=True)
-    bronze = models.PositiveSmallIntegerField(db_column='銅幣', blank=True, null=True)
-    silver = models.PositiveSmallIntegerField(db_column='銀幣', blank=True, null=True)
-    gold = models.PositiveSmallIntegerField(db_column='金幣', blank=True, null=True)
-    platinum = models.PositiveSmallIntegerField(db_column='白金幣', blank=True, null=True)
-    memory = models.PositiveSmallIntegerField(db_column='記憶的碎片', blank=True, null=True)
-    time = models.PositiveSmallIntegerField(db_column='時間的碎片', blank=True, null=True)
-    soul = models.PositiveSmallIntegerField(db_column='靈魂的碎片', blank=True, null=True)
-    light = models.PositiveSmallIntegerField(db_column='生命的碎片', blank=True, null=True)
-    unlight = models.PositiveSmallIntegerField(db_column='死亡的碎片', blank=True, null=True)
+    m1 = models.PositiveSmallIntegerField(db_column='M1', blank=True, default=0)  # Field name made lowercase.
+    m2 = models.PositiveSmallIntegerField(db_column='M2', blank=True, default=0)  # Field name made lowercase.
+    m3 = models.PositiveSmallIntegerField(db_column='M3', blank=True, default=0)  # Field name made lowercase.
+    iron = models.PositiveSmallIntegerField(db_column='鐵幣', blank=True, default=0)
+    bronze = models.PositiveSmallIntegerField(db_column='銅幣', blank=True, default=0)
+    silver = models.PositiveSmallIntegerField(db_column='銀幣', blank=True, default=0)
+    gold = models.PositiveSmallIntegerField(db_column='金幣', blank=True, default=0)
+    platinum = models.PositiveSmallIntegerField(db_column='白金幣', blank=True, default=0)
+    memory = models.PositiveSmallIntegerField(db_column='記憶的碎片', blank=True, default=0)
+    time = models.PositiveSmallIntegerField(db_column='時間的碎片', blank=True, default=0)
+    soul = models.PositiveSmallIntegerField(db_column='靈魂的碎片', blank=True, default=0)
+    light = models.PositiveSmallIntegerField(db_column='生命的碎片', blank=True, default=0)
+    unlight = models.PositiveSmallIntegerField(db_column='死亡的碎片', blank=True, default=0)
     region = models.ForeignKey(Region, db_column='region_id', on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:

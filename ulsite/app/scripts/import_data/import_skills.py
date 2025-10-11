@@ -64,8 +64,5 @@ def import_non_img_data(csv_path: str):
         print(f"Total skills now: {Skill.objects.count()}")
 
 def run():
-    base_dir = "/Users/hungciyi/UL_site"
-    csv_path = f'{base_dir}/crawl/csv_data/skills.csv'
-    #img_dir = f'{base_dir}/images/monsters'
+    csv_path = '../crawl/csv_data/skills.csv'
     import_non_img_data(csv_path)
-    #import_img(img_dir)

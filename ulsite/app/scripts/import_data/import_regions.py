@@ -2,7 +2,7 @@ from app.models import Area, Region
 import csv
 
 def initAdd():
-    with open('/Users/hungciyi/UL_site/crawl/csv_data/regions.csv', 'r', newline='') as csvfile:
+    with open('../crawl/csv_data/regions.csv', 'r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for r, a in reader:
             area = Area.objects.get(name=a)
@@ -12,7 +12,7 @@ def initAdd():
             )
 
 def updateAreaObj():
-    with open('/Users/hungciyi/UL_site/crawl/csv_data/regions.csv', 'r', newline='') as csvfile:
+    with open('../crawl/csv_data/regions.csv', 'r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for r, a in reader:
             region_obj = Region.objects.get(name=r)
@@ -21,7 +21,7 @@ def updateAreaObj():
             region_obj.save()
 
 def run():
-    updateAreaObj()
+    initAdd()
 
     print(Region.objects.all())
     """

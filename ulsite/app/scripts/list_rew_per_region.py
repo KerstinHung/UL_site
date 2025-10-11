@@ -24,21 +24,24 @@ def get_quest_rew(region: str):
             l = qss.filter(stage=i, position='L').first()
             m = qss.filter(stage=i, position='M').first()
             r = qss.filter(stage=i, position='R').first()
-            lm = l.monster.level if l.monster else 0
-            mm = m.monster.level if m.monster else 0
-            rm = r.monster.level if r.monster else 0
+            lm = l.monster.level if l and l.monster else 0
+            mm = m.monster.level if m and m.monster else 0
+            rm = r.monster.level if r and r.monster else 0
             for i in range(1,4):
                 if lm == i or mm == i or rm == i: m123[i-1]+=1
-            lc = l.characard
-            mc = m.characard
-            rc = r.characard
+            lc = l and l.characard
+            mc = m and m.characard
+            rc = r and r.characard
             if lc: chara.append(lc.character.name)
             if mc: chara.append(mc.character.name)
             if rc: chara.append(rc.character.name)
-            gems += max(l.gem, m.gem, r.gem)
-            lt = l.text_reward
-            mt = m.text_reward
-            rt = r.text_reward
+            lg = l.gem if l else 0
+            mg = m.gem if m else 0
+            rg = r.gem if r else 0
+            gems += max(lg, mg, rg)
+            lt = l.text_reward if l else ""
+            mt = m.text_reward if m else ""
+            rt = r.text_reward if r else ""
             raw_txt = ''
             if ("鐵幣" in lt) or ("鐵幣" in mt) or ("鐵幣" in rt): iron += 1
             if ("銅幣" in lt) or ("銅幣" in mt) or ("銅幣" in rt): bronze += 1
@@ -83,7 +86,7 @@ def write_rew(quest_name: str, rews: dict):
 
 def run():
     
-    csv_dir = '/Users/hungciyi/UL_site/crawl/csv_data/quest_table/'
+    csv_dir = '../crawl/csv_data/quest_table/'
     regions = os.listdir(csv_dir)
     for region in regions:
         region = region.replace(".csv","")

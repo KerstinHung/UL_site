@@ -6,8 +6,22 @@ def _to_int(x):
         return int(x)
     except (TypeError, ValueError):
         return None
+def import_french_month():
+    fr_names = ['Vendémiaire','Brumaire','	Frimaire','Nivôse','Pluviôse','Ventôse','Germinal','Floréal','Prairial','Messidor','Thermidor','Fructidor']
+    cn_names = ['釀','霧','霜','雪','雨','風','芽','花','牧','穫','熱','菓']
+    n = len(fr_names)
+    for i in range(n):
+        defaults = dict(
+            id = i,
+            fr_name = fr_names[i],
+            cn_name = cn_names[i],
+        )
+        obj, created = FrenchMonth.objects.get_or_create(fr_name=fr_names[i], defaults=defaults)
 
-def import_non_img_data(csv_path: str):
+        if not created:
+            FrenchMonth.objects.filter(pk=obj.pk).update(**defaults)
+
+def import_day_non_img_data(csv_path: str):
     # Open csv
     with open(csv_path, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
@@ -60,17 +74,13 @@ def import_non_img_data(csv_path: str):
             if created:
                 created_cnt += 1
             else:
-                # If Exist, Update it
                 Calendar.objects.filter(pk=obj.pk).update(**defaults)
                 updated_cnt += 1
-                # Do Not Want to Update, You Can:
-                # skipped_cnt += 1
-                # continue
 
         print(f"Days created: {created_cnt}, updated: {updated_cnt}, skipped: {skipped_cnt}")
         print(f"Total skills now: {Calendar.objects.count()}")
 
 def run():
-    base_dir = "/Users/hungciyi/UL_site"
-    csv_path = f'{base_dir}/crawl/csv_data/french_republican_full.csv'
-    import_non_img_data(csv_path)
+    csv_path = '../crawl/csv_data/french_republican_full.csv'
+    import_french_month()
+    import_day_non_img_data(csv_path)

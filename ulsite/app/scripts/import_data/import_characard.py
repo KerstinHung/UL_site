@@ -80,6 +80,8 @@ def import_non_img_data(csv_path: str):
                 crazy = crazy_i,
                 character = chara_obj
             )
+            # 過濾掉 None 值
+            defaults = {k: v for k, v in defaults.items() if v is not None}
 
             obj, created = CharacterCard.objects.get_or_create(id = id, defaults=defaults)
 
@@ -93,8 +95,5 @@ def import_non_img_data(csv_path: str):
         print(f"Total CharacterCard now: {CharacterCard.objects.count()}")
 
 def run():
-    base_dir = "/Users/hungciyi/UL_site"
-    csv_path = f'{base_dir}/crawl/csv_data/characards.csv'
-    #img_dir = f'{base_dir}/images/monsters'
+    csv_path = '../crawl/csv_data/characards.csv'
     import_non_img_data(csv_path)
-    #import_img(img_dir)

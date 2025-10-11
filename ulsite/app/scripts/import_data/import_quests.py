@@ -156,6 +156,7 @@ def import_quest(csv_path: str, region: str):
                     day3 = day3_b,
                     region = region_obj,
                 )
+            defaults = {k: v for k, v in defaults.items() if v is not None}
             obj, created = Quest.objects.get_or_create(name=quest_name, defaults=defaults)
 
             if created:
@@ -197,14 +198,10 @@ def only_update_goal(csv_path: str, region: str):
 
 def run():
     
-    # Delete all queststage
-    queststages = QuestStage.objects.all()
-    queststages.delete()
-    
-    csv_dir = '/Users/hungciyi/UL_site/crawl/csv_data/quest_table/'
+    csv_dir = '../crawl/csv_data/quest_table/'
     paths = os.listdir(csv_dir)
     for p in paths:
         csv_path = os.path.join(csv_dir, p)
         #only_update_goal(csv_path, p.replace(".csv", ""))
-        #import_quest(csv_path, p.replace(".csv", ""))
+        import_quest(csv_path, p.replace(".csv", ""))
         import_quest_stage(csv_path)

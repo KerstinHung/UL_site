@@ -39,7 +39,7 @@ def import_non_img_data(csv_path: str):
             month_obj = FrenchMonth.objects.filter(cn_name=birth_month).first() if birth_month else None
 
             if blood_type not in "ABOAB":
-                blood_type = None
+                blood_type = ""
 
             day_obj = Calendar.objects.filter(fr_m=month_obj, fr_d=bd_i).first() if month_obj and bd_i else None
             skill1_obj = Skill.objects.filter(name=skill1).first() if skill1 else None
@@ -57,7 +57,7 @@ def import_non_img_data(csv_path: str):
                 jp_name = jp_name,
                 eng_name = eng_name,
                 birth_day = day_obj,
-                blood_type = blood_type or None,
+                blood_type = blood_type,
                 height = height_i,
                 weight = weight_i,
                 hobby = hobby,
@@ -74,7 +74,7 @@ def import_non_img_data(csv_path: str):
                 exskill4 = exskill4_obj,
                 birth_place = birth_place_obj,
             )
-
+            defaults = {k: v for k, v in defaults.items() if v is not None}
             obj, created = Character.objects.get_or_create(name=name, defaults=defaults)
 
             if created:
@@ -87,8 +87,7 @@ def import_non_img_data(csv_path: str):
         print(f"Total character now: {Character.objects.count()}")
 
 def run():
-    base_dir = "/Users/hungciyi/UL_site"
-    csv_path = f'{base_dir}/crawl/csv_data/characters.csv'
-    #img_dir = f'{base_dir}/images/monsters'
+    csv_path = '../crawl/csv_data/characters.csv'
+    #img_dir = '../images/monsters'
     import_non_img_data(csv_path)
     #import_img(img_dir)
