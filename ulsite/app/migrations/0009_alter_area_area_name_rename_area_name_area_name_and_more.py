@@ -31,44 +31,24 @@ class Migration(migrations.Migration):
             old_name='region_name',
             new_name='name',
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                    migrations.AddField(
-                        model_name='monster',
-                        name='family',
-                        field=models.ForeignKey(blank=True, db_column='base_monster_id', null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.monster'),
-                    ),
-                ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='monster',
+            name='family',
+            field=models.ForeignKey(blank=True, db_column='base_monster_id', null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.monster'),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='region',
-                    name='area',
-                    field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.area'),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='region',
+            name='area',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.area'),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AlterField(
-                    model_name='area',
-                    name='id',
-                    field=models.AutoField(primary_key=True, serialize=False),
-                ),
-            ],
-            database_operations=[],
+        migrations.AlterField(
+            model_name='area',
+            name='id',
+            field=models.AutoField(primary_key=True, serialize=False),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AlterField(
-                    model_name='region',
-                    name='id',
-                    field=models.AutoField(primary_key=True, serialize=False),
-                ),
-            ],
-            database_operations=[],
+        migrations.AlterField(
+            model_name='region',
+            name='id',
+            field=models.AutoField(primary_key=True, serialize=False),
         ),
     ]

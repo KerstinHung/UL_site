@@ -15,95 +15,50 @@ class Migration(migrations.Migration):
             old_name='BitrhPlace',
             new_name='BirthPlace',
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='character',
-                    name='cv',
-                    field=models.CharField(blank=True, max_length=6, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='character',
+            name='cv',
+            field=models.CharField(blank=True, max_length=6, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='character',
-                    name='description',
-                    field=models.CharField(blank=True, max_length=50, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='character',
+            name='description',
+            field=models.CharField(blank=True, max_length=50, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='character',
-                    name='hobby',
-                    field=models.CharField(blank=True, max_length=10, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='character',
+            name='hobby',
+            field=models.CharField(blank=True, max_length=10, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='character',
-                    name='title',
-                    field=models.CharField(blank=True, max_length=15, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='character',
+            name='title',
+            field=models.CharField(blank=True, max_length=15, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='character',
-                    name='weight',
-                    field=models.PositiveSmallIntegerField(blank=True, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='character',
+            name='weight',
+            field=models.PositiveSmallIntegerField(blank=True, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='monster',
-                    name='ATK',
-                    field=models.PositiveSmallIntegerField(blank=True, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='monster',
+            name='ATK',
+            field=models.PositiveSmallIntegerField(blank=True, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='monster',
-                    name='DEF',
-                    field=models.PositiveSmallIntegerField(blank=True, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='monster',
+            name='DEF',
+            field=models.PositiveSmallIntegerField(blank=True, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='monster',
-                    name='HP',
-                    field=models.PositiveSmallIntegerField(blank=True, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='monster',
+            name='HP',
+            field=models.PositiveSmallIntegerField(blank=True, null=True),
         ),
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                    model_name='monster',
-                    name='cost',
-                    field=models.PositiveSmallIntegerField(blank=True, null=True),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='monster',
+            name='cost',
+            field=models.PositiveSmallIntegerField(blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='character',

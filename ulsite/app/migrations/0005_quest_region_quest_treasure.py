@@ -11,19 +11,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.SeparateDatabaseAndState(
-            state_operations=[
-                migrations.AddField(
-                model_name='quest',
-                name='region',
-                field=models.ForeignKey(blank=True, 
-                                        db_column='region_id', 
-                                        null=True, 
-                                        on_delete=django.db.models.deletion.DO_NOTHING, 
-                                        to='app.region'),
-                ),
-            ],
-            database_operations=[],
+        migrations.AddField(
+            model_name='quest',
+            name='region',
+            field=models.ForeignKey(blank=True, 
+                                    db_column='region_id', 
+                                    null=True, 
+                                    on_delete=django.db.models.deletion.DO_NOTHING, 
+                                    to='app.region'),
         ),
         migrations.AddField(
             model_name='quest',

@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'area',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'quest',
-                'managed': False,
+                'managed': True,
             },
         ),
         migrations.CreateModel(
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'region',
-                'managed': False,
+                'managed': True,
             },
         ),
     ]
