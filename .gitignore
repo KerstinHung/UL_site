@@ -31,3 +31,9 @@ create_table.sql
 # Custom
 crawl/
 images/
+
+# Node
+node_modules
+package-lock.json
+package.json
+test-results
