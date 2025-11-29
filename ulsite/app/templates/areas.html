@@ -105,5 +105,9 @@
       </tbody>
     </table>
     </div>
-  <script src="{% static 'js/quest.js' %}?v={% now 'U' %}"></script>
+  <!--TO. FIX: react not functioning-->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="{% static 'build/static/js/main.bd33cc21.js' %}?v={% now 'U' %}"></script>
+  <link rel="stylesheet" href="{% static 'build/static/css/main.f855e6bc.css' %}">
+  <!--<script src="{% static 'js/quest.js' %}?v={% now 'U' %}"></script>-->
 {% endblock %}
